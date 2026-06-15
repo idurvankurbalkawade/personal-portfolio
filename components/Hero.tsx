@@ -42,10 +42,10 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center pt-16 pb-8 px-6 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center pb-8 px-6 relative overflow-hidden"
       style={{
         background:
-          'radial-gradient(circle at 20% 20%, rgba(99,102,241,0.06) 0, transparent 12%), linear-gradient(180deg,#07123a 0%, #021022 100%)',
+          'radial-gradient(circle at 10% 20%, rgba(100,255,218,0.03) 0, transparent 20%), linear-gradient(180deg,#0f1724 0%, #020617 100%)',
       }}
     >
       <style>{`
@@ -57,13 +57,13 @@ export default function Hero() {
         @keyframes blink { 50% { opacity: 0 } }
       `}</style>
 
-      <div className="max-w-6xl mx-auto w-full hero-grid gap-12 items-center">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div className="text-center mx-auto max-w-xl">
           <p className="font-mono text-[#64ffda] text-sm mb-2">Hi there, I'm</p>
 
           <h1 className="text-5xl sm:text-6xl font-bold text-white mb-3">Durvankur Balkawade</h1>
 
-          <p className="text-[#64ffda] text-2xl font-medium mb-4 h-8" aria-live="polite">
+          <p className="text-[#64ffda] text-2xl font-medium mb-4 h-10" aria-live="polite">
             {displayText}
             <span className="type-caret" aria-hidden />
           </p>

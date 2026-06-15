@@ -1,11 +1,9 @@
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
 
 export default function Home() {
   return (
     <main>
-      <Navbar />
       <Hero />
 
       <section id="about" className="py-24 bg-[#071023]">
