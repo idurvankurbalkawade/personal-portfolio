@@ -21,7 +21,7 @@ const skills: Skill[] = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="bg-[#0a192f] py-20 px-6">
+    <section id="skills" className="py-20 px-6" style={{ background: 'radial-gradient(ellipse 50% 60% at 0% 50%, rgba(100,255,218,0.07) 0%, transparent 55%), radial-gradient(rgba(100,255,218,0.04) 1px, transparent 1px)', backgroundColor: '#060f1e', backgroundSize: 'auto, 28px 28px' }}>
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <div className="text-[#64ffda] font-mono text-sm mb-2">What I Work With</div>
