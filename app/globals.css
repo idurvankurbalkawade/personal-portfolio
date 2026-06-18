@@ -2,3 +2,8 @@
 
 @source "../components/**/*.tsx";
 @source "../app/**/*.tsx";
+
+html,
+body {
+  background-color: #060d1a;
+}
