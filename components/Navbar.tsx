@@ -24,25 +24,31 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Highlight active section via IntersectionObserver
+  // Scroll-spy: active = section whose top is closest to (but not past) 30% down the viewport
   useEffect(() => {
     const sectionIds = links.map((l) => l.href.slice(1));
-    const observers: IntersectionObserver[] = [];
 
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id);
-        },
-        { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
+    const spy = () => {
+      const trigger = window.scrollY + window.innerHeight * 0.3;
+      let best = sectionIds[0];
+      let bestTop = -Infinity;
 
-    return () => observers.forEach((o) => o.disconnect());
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        if (top <= trigger && top > bestTop) {
+          bestTop = top;
+          best = id;
+        }
+      }
+
+      setActiveSection(best);
+    };
+
+    spy(); // run on mount
+    window.addEventListener("scroll", spy, { passive: true });
+    return () => window.removeEventListener("scroll", spy);
   }, []);
 
   // Close mobile menu on outside click
