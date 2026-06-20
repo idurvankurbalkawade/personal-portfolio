@@ -7,7 +7,7 @@ const links = [
   { name: "About", href: "#about" },
   { name: "Skills", href: "#skills" },
   { name: "Experience", href: "#experience" },
-  { name: "Contact", href: "#contact" },
+  { name: "Certifications", href: "#certifications" },
 ];
 
 export default function Navbar() {

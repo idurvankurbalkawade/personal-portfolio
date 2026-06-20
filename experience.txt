@@ -1,0 +1,18 @@
+Software Engineer Trainee
+Implemented RESTful APIs using FastAPI to support backend functionality of an AI-based platform  
+Assisted in backend development and feature implementation for core product modules  
+Collaborated with the development team to test, debug, and refine API functionality
+Aug 2023 - April 2025
+iLink Digital
+Intern
+Underwent structured technical training in Python backend development and FastAPI framework
+Learned REST API development, database integration, and backend architecture concepts
+Jan 2023 - July 2023
+iLink Digital
+Software Engineer
+Developed and maintained scalable backend APIs using FastAPI for AI-driven platform features  
+Contributed to AI solution development using LangChain and LangGraph for workflow orchestration and processing  
+Designed backend components to support real-time data processing and system operations  
+Collaborated with team members to implement backend logic for product features and enhancements
+April 2025 - Present
+iLink Digital

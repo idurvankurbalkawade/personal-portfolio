@@ -1,0 +1,4 @@
+Microsoft Certified: Azure Fundamentals
+Certified in Microsoft Azure Fundamentals (AZ-900), demonstrating foundational knowledge of cloud concepts and core Azure services.
+Microsoft Certified: Azure AI Fundamentals
+Certified in Microsoft Azure AI Fundamentals (AI-900), demonstrating foundational knowledge of AI concepts and core Azure AI Services.
