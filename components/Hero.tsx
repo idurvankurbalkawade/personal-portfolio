@@ -190,30 +190,6 @@ export default function Hero() {
           Focused on scalable architectures that turn complex AI workflows into reliable products.
         </p>
 
-        {/* CTA buttons */}
-        <div className="fade-up-5 flex flex-wrap gap-4 justify-center mb-10">
-          <button
-            onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-            className="group inline-flex items-center gap-2 bg-[#64ffda] text-[#060d1a] font-semibold text-sm px-7 py-3 rounded-lg transition-all duration-200 hover:brightness-110 shadow-[0_0_24px_rgba(100,255,218,0.22)] hover:shadow-[0_0_36px_rgba(100,255,218,0.38)]"
-          >
-            View Projects
-            <svg className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </button>
-
-          <a
-            href="/resume.pdf"
-            download
-            className="inline-flex items-center gap-2 border border-[#64ffda]/40 text-[#64ffda] text-sm font-semibold px-7 py-3 rounded-lg transition-all duration-200 hover:bg-[#64ffda]/8 hover:border-[#64ffda]/70"
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
-            </svg>
-            Download Resume
-          </a>
-        </div>
-
         {/* Social links */}
         <div className="fade-up-6 flex items-center justify-center gap-6">
           <a
@@ -232,7 +208,7 @@ export default function Hero() {
           <span className="w-px h-4 bg-gray-700" aria-hidden />
 
           <a
-            href="https://linkedin.com/in/durvankur-balkawade"
+            href="www.linkedin.com/in/durvankur-balkawade-1197a61b3"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
