@@ -191,33 +191,31 @@ export default function Hero() {
         </p>
 
         {/* Social links */}
-        <div className="fade-up-6 flex items-center justify-center gap-6">
+        <div className="fade-up-6 flex flex-wrap items-center justify-center gap-4">
           <a
             href="https://github.com/idurvankurbalkawade"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="group flex items-center gap-2 text-gray-500 hover:text-[#64ffda] transition-colors duration-200 text-sm"
+            className="group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl border border-[#64ffda]/20 bg-white/[0.03] backdrop-blur-sm text-gray-300 text-sm font-medium tracking-wide transition-all duration-250 hover:border-[#64ffda]/60 hover:text-[#64ffda] hover:bg-[#64ffda]/[0.06] hover:shadow-[0_0_20px_rgba(100,255,218,0.12)]"
           >
-            <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden>
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-4.5 h-4.5 shrink-0 transition-transform duration-200 group-hover:scale-110" aria-hidden>
               <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.69-3.88-1.54-3.88-1.54-.53-1.36-1.3-1.72-1.3-1.72-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.76.41-1.27.75-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.45.11-3.03 0 0 .97-.31 3.18 1.18a11.06 11.06 0 0 1 2.9-.39c.99.01 1.99.13 2.92.39 2.2-1.5 3.17-1.18 3.17-1.18.63 1.58.24 2.74.12 3.03.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.42.36.8 1.08.8 2.18 0 1.57-.01 2.84-.01 3.23 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z" />
             </svg>
-            <span className="font-mono text-xs tracking-wide">GitHub</span>
+            GitHub
           </a>
 
-          <span className="w-px h-4 bg-gray-700" aria-hidden />
-
           <a
-            href="www.linkedin.com/in/durvankur-balkawade-1197a61b3"
+            href="https://www.linkedin.com/in/durvankur-balkawade-1197a61b3"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="group flex items-center gap-2 text-gray-500 hover:text-[#64ffda] transition-colors duration-200 text-sm"
+            className="group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl border border-[#64ffda]/20 bg-white/[0.03] backdrop-blur-sm text-gray-300 text-sm font-medium tracking-wide transition-all duration-250 hover:border-[#64ffda]/60 hover:text-[#64ffda] hover:bg-[#64ffda]/[0.06] hover:shadow-[0_0_20px_rgba(100,255,218,0.12)]"
           >
-            <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden>
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-4.5 h-4.5 shrink-0 transition-transform duration-200 group-hover:scale-110" aria-hidden>
               <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 0h4.7v2.2h.1c.66-1.25 2.27-2.56 4.67-2.56C22.2 7.64 24 9.84 24 13.9V24h-5V14.9c0-2.15-.04-4.92-3-4.92-3 0-3.46 2.34-3.46 4.78V24h-5V8z" />
             </svg>
-            <span className="font-mono text-xs tracking-wide">LinkedIn</span>
+            LinkedIn
           </a>
         </div>
 
