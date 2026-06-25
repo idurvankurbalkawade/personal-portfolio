@@ -1,148 +1,231 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import {
+  SiPython, SiGo,
+  SiFastapi, SiLangchain,
+  SiPostgresql, SiRedis, SiOpensearch,
+  SiDocker, SiKubernetes, SiGit, SiGithub,
+  SiApachekafka,
+} from "react-icons/si";
+import { VscTerminal, VscAzure } from "react-icons/vsc";
+import { FiLayers, FiDatabase, FiServer } from "react-icons/fi";
+import { FaCoffee } from "react-icons/fa";
+import { IconType } from "react-icons";
 
-const categories = [
+type Skill = { name: string; Icon: IconType; color: string };
+
+const categories: { label: string; Icon: IconType; color: string; skills: Skill[] }[] = [
   {
     label: "Programming Languages",
+    Icon: VscTerminal,
+    color: "rgba(100,255,218,0.09)",
     skills: [
-      { name: "Python", emoji: "🐍" },
-      { name: "Go", emoji: "🐹" },
-      { name: "Java", emoji: "☕" },
+      { name: "Python",  Icon: SiPython, color: "#3776AB" },
+      { name: "Go",      Icon: SiGo,     color: "#00ADD8" },
+      { name: "Java",    Icon: FaCoffee, color: "#ED8B00" },
     ],
   },
   {
     label: "Frameworks & Libraries",
+    Icon: FiLayers,
+    color: "rgba(130,180,255,0.09)",
     skills: [
-      { name: "FastAPI", emoji: "⚡" },
-      { name: "LangChain", emoji: "🔗" },
-      { name: "LangGraph", emoji: "🕸️" },
+      { name: "FastAPI",    Icon: SiFastapi,   color: "#009688" },
+      { name: "LangChain", Icon: SiLangchain,  color: "#64ffda" },
+      { name: "LangGraph", Icon: SiLangchain,  color: "#64ffda" },
     ],
   },
   {
     label: "Databases & Search",
+    Icon: FiDatabase,
+    color: "rgba(180,100,255,0.09)",
     skills: [
-      { name: "PostgreSQL", emoji: "🐘" },
-      { name: "Redis", emoji: "🔴" },
-      { name: "OpenSearch", emoji: "🔍" },
+      { name: "PostgreSQL", Icon: SiPostgresql,  color: "#336791" },
+      { name: "Redis",      Icon: SiRedis,       color: "#DC382D" },
+      { name: "OpenSearch", Icon: SiOpensearch,  color: "#005EB8" },
     ],
   },
   {
-    label: "DevOps Tools",
+    label: "DevOps & Tools",
+    Icon: FiServer,
+    color: "rgba(255,180,80,0.08)",
     skills: [
-      { name: "Docker", emoji: "🐳" },
-      { name: "Kubernetes", emoji: "☸️" },
+      { name: "Docker",     Icon: SiDocker,         color: "#2496ED" },
+      { name: "Kubernetes", Icon: SiKubernetes,      color: "#326CE5" },
+      { name: "Git",        Icon: SiGit,             color: "#F05032" },
+      { name: "GitHub",     Icon: SiGithub,          color: "#e6edf3" },
+      { name: "Azure",      Icon: VscAzure,          color: "#0078D4" },
+      { name: "Kafka",      Icon: SiApachekafka,     color: "#231F20" },
     ],
   },
 ];
 
-const NAV_ICONS: Record<string, string> = {
-  "Programming Languages": "</>",
-  "Frameworks & Libraries": "⬡",
-  "Databases & Search": "⬢",
-  "DevOps Tools": "⚙",
-};
+const CARD_MIN = 148;
 
 export default function Skills() {
-  const [active, setActive] = useState("Programming Languages");
-  const [visible, setVisible] = useState(true);
-  const [displayed, setDisplayed] = useState(categories[0].skills); // Programming Languages is index 0 now
+  const [activeIdx, setActiveIdx]   = useState(0);
+  const [visible, setVisible]       = useState(true);
+  const [displayed, setDisplayed]   = useState(categories[0].skills);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleSelect = (label: string) => {
-    if (label === active) return;
+  const activeCat = categories[activeIdx];
+
+  const handleSelect = (idx: number) => {
+    if (idx === activeIdx) return;
     setVisible(false);
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
-      setActive(label);
-      setDisplayed(categories.find((c) => c.label === label)!.skills);
+      setActiveIdx(idx);
+      setDisplayed(categories[idx].skills);
       setVisible(true);
-    }, 200);
+    }, 160);
   };
 
   useEffect(() => () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); }, []);
+
+  const skillCount = displayed.length;
 
   return (
     <section
       id="skills"
       className="py-20 px-6"
       style={{
-        background:
-          "radial-gradient(ellipse 50% 60% at 0% 50%, rgba(100,255,218,0.07) 0%, transparent 55%), radial-gradient(rgba(100,255,218,0.04) 1px, transparent 1px)",
-        backgroundColor: "#060f1e",
-        backgroundSize: "auto, 28px 28px",
+        background: "radial-gradient(rgba(100,255,218,0.025) 1px, transparent 1px)",
+        backgroundColor: "#0a192f",
+        backgroundSize: "28px 28px",
       }}
     >
       <style>{`
-        @keyframes skill-in {
-          from { opacity: 0; transform: translateY(14px); }
-          to   { opacity: 1; transform: translateY(0); }
+        @keyframes skill-pop {
+          from { opacity: 0; transform: translateY(8px) scale(0.95); }
+          to   { opacity: 1; transform: translateY(0)  scale(1);    }
         }
-        .skill-in { animation: skill-in 0.28s ease forwards; }
+        .skill-pop { animation: skill-pop 0.2s ease forwards; }
       `}</style>
 
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-4xl mx-auto">
+
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="text-[#64ffda] font-mono text-sm mb-2">What I Work With</div>
-          <h2 className="text-4xl font-bold text-white mb-4">Skills & Technologies</h2>
-          <div className="w-16 h-[2px] bg-[#64ffda] mx-auto" />
+        <div className="text-center mb-10">
+          <p className="text-[#64ffda] font-mono text-[11px] tracking-[0.2em] uppercase mb-2">
+            What I Work With
+          </p>
+          <h2 className="text-3xl font-bold text-white mb-3">Skills &amp; Technologies</h2>
+          <div className="w-10 h-[2px] bg-[#64ffda] mx-auto rounded-full" />
         </div>
 
-        {/* Layout */}
-        <div className="flex flex-col md:flex-row gap-8">
+        {/* Outer glow wrapper */}
+        <div
+          className="relative rounded-2xl transition-all duration-500"
+          style={{
+            boxShadow: `0 0 60px 0 ${activeCat.color}, 0 0 0 1px rgba(100,255,218,0.08)`,
+          }}
+        >
+          <div
+            className="absolute inset-0 rounded-2xl pointer-events-none transition-all duration-500"
+            style={{
+              background: `radial-gradient(ellipse 70% 80% at 30% 50%, ${activeCat.color}, transparent 75%)`,
+            }}
+          />
 
-          {/* Left nav */}
-          <aside className="md:w-56 shrink-0">
-            <div className="flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-visible pb-2 md:pb-0">
-              {categories.map((cat) => {
-                const isActive = active === cat.label;
-                return (
-                  <button
-                    key={cat.label}
-                    onClick={() => handleSelect(cat.label)}
-                    className={`group relative flex items-center gap-3 px-4 py-3 rounded-xl text-left text-sm font-medium tracking-wide whitespace-nowrap md:whitespace-normal transition-all duration-200 border
-                      ${isActive
-                        ? "bg-[#64ffda]/10 border-[#64ffda]/50 text-[#64ffda] shadow-[0_0_18px_rgba(100,255,218,0.1)]"
-                        : "bg-transparent border-transparent text-gray-500 hover:text-gray-200 hover:bg-white/[0.03] hover:border-[#64ffda]/15"
-                      }`}
-                  >
-                    {/* active indicator bar */}
-                    <span
-                      className={`hidden md:block absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-full transition-all duration-200 ${isActive ? "h-6 bg-[#64ffda]" : "h-0"}`}
-                    />
-                    <span className="font-mono text-xs w-5 text-center shrink-0 opacity-60">{NAV_ICONS[cat.label]}</span>
-                    <span>{cat.label}</span>
-                  </button>
-                );
-              })}
+          {/* Panel */}
+          <div
+            className="relative flex flex-col md:flex-row rounded-2xl overflow-hidden border border-[#64ffda]/10"
+            style={{ background: "rgba(8,20,42,0.82)", backdropFilter: "blur(16px)" }}
+          >
+
+            {/* Sidebar */}
+            <aside className="md:w-52 shrink-0 border-b md:border-b-0 md:border-r border-white/[0.06]">
+              <nav className="flex flex-row md:flex-col overflow-x-auto md:overflow-visible p-2 gap-0.5">
+                {categories.map((cat, idx) => {
+                  const isActive = activeIdx === idx;
+                  const CatIcon = cat.Icon;
+                  return (
+                    <button
+                      key={cat.label}
+                      onClick={() => handleSelect(idx)}
+                      className={`relative flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-left text-[12.5px] font-medium whitespace-nowrap md:whitespace-normal w-full transition-all duration-200 outline-none
+                        ${isActive
+                          ? "text-[#64ffda]"
+                          : "text-gray-500 hover:text-gray-300 hover:bg-white/[0.04]"
+                        }`}
+                      style={isActive ? { background: `${cat.color}` } : {}}
+                    >
+                      <span
+                        className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-full transition-all duration-200"
+                        style={{
+                          height: isActive ? "18px" : "0px",
+                          background: "#64ffda",
+                          opacity: isActive ? 1 : 0,
+                        }}
+                      />
+                      <CatIcon
+                        size={15}
+                        className="shrink-0 transition-opacity duration-200"
+                        style={{ opacity: isActive ? 0.9 : 0.4 }}
+                      />
+                      <span className="leading-snug">{cat.label}</span>
+                    </button>
+                  );
+                })}
+              </nav>
+            </aside>
+
+            {/* Skills panel */}
+            <div className="flex-1 p-5">
+              <p className="font-mono text-[10px] tracking-[0.18em] uppercase mb-4 transition-colors duration-300"
+                style={{ color: "rgba(100,255,218,0.55)" }}>
+                {activeCat.label}
+              </p>
+
+              <div
+                className={`transition-opacity duration-160 ${visible ? "opacity-100" : "opacity-0"}`}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: `repeat(auto-fit, minmax(${CARD_MIN}px, 1fr))`,
+                  gap: "10px",
+                  justifyContent: skillCount <= 2 ? "center" : "start",
+                }}
+              >
+                {displayed.map((s, i) => {
+                  const SkillIcon = s.Icon;
+                  return (
+                    <div
+                      key={s.name}
+                      className="skill-pop group relative flex items-center gap-3 px-3.5 py-3 rounded-xl border cursor-default overflow-hidden transition-all duration-200 ease-out hover:-translate-y-[3px] hover:scale-[1.035]"
+                      style={{
+                        animationDelay: `${i * 40}ms`,
+                        background: "rgba(13,28,55,0.75)",
+                        borderColor: "rgba(100,255,218,0.1)",
+                      }}
+                      onMouseEnter={e => {
+                        (e.currentTarget as HTMLElement).style.borderColor = "rgba(100,255,218,0.4)";
+                        (e.currentTarget as HTMLElement).style.boxShadow = `0 6px 20px rgba(100,255,218,0.1), 0 0 0 1px rgba(100,255,218,0.08)`;
+                      }}
+                      onMouseLeave={e => {
+                        (e.currentTarget as HTMLElement).style.borderColor = "rgba(100,255,218,0.1)";
+                        (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                      }}
+                    >
+                      <div
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
+                        style={{ background: "radial-gradient(ellipse 80% 60% at 10% 50%, rgba(100,255,218,0.07), transparent 70%)" }}
+                      />
+                      <SkillIcon
+                        size={26}
+                        className="shrink-0 transition-transform duration-200 group-hover:scale-110"
+                        style={{ color: s.color }}
+                      />
+                      <span className="relative text-[13px] font-medium tracking-wide leading-tight transition-colors duration-200 text-gray-400 group-hover:text-[#64ffda]">
+                        {s.name}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </aside>
 
-          {/* Divider */}
-          <div className="hidden md:block w-px bg-gradient-to-b from-transparent via-[#64ffda]/20 to-transparent" />
-
-          {/* Right: skill cards */}
-          <div className="flex-1 min-h-[220px]">
-            <div
-              className={`grid grid-cols-2 sm:grid-cols-3 gap-4 transition-opacity duration-200 ${visible ? "opacity-100" : "opacity-0"}`}
-            >
-              {displayed.map((s, i) => (
-                <div
-                  key={s.name}
-                  className="skill-in group relative bg-[#0d1f3c] border border-[#64ffda]/15 rounded-xl px-5 py-4 flex items-center gap-3 cursor-pointer overflow-hidden z-0 transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.06] hover:z-10 hover:border-[#64ffda]/60 hover:bg-[#0f2444] hover:shadow-[0_10px_36px_rgba(100,255,218,0.16),0_0_0_1px_rgba(100,255,218,0.1)] active:scale-[0.97] active:translate-y-0 active:shadow-none active:transition-none"
-                  style={{ animationDelay: `${i * 40}ms` }}
-                >
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                    style={{ background: "radial-gradient(ellipse 80% 60% at 20% 50%, rgba(100,255,218,0.06) 0%, transparent 70%)" }}
-                  />
-                  <span className="text-2xl shrink-0 transition-transform duration-300 group-hover:scale-125 group-hover:rotate-[-6deg]">{s.emoji}</span>
-                  <p className="relative text-gray-400 text-sm font-medium tracking-wide group-hover:text-[#64ffda] transition-colors duration-300">{s.name}</p>
-                </div>
-              ))}
-            </div>
           </div>
-
         </div>
       </div>
     </section>

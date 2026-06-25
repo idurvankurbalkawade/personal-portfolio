@@ -8,6 +8,7 @@ const links = [
   { name: "Skills", href: "#skills" },
   { name: "Experience", href: "#experience" },
   { name: "Certifications", href: "#certifications" },
+  { name: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
@@ -29,6 +30,12 @@ export default function Navbar() {
     const sectionIds = links.map((l) => l.href.slice(1));
 
     const spy = () => {
+      // If scrolled to bottom, activate last section
+      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - window.innerHeight * 0.7) {
+        setActiveSection(sectionIds[sectionIds.length - 1]);
+        return;
+      }
+
       const trigger = window.scrollY + window.innerHeight * 0.3;
       let best = sectionIds[0];
       let bestTop = -Infinity;
