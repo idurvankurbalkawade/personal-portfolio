@@ -36,17 +36,17 @@ const experiences = [
       "Learned REST API development, database integration, and backend architecture concepts",
     ],
     tech: ["Python", "FastAPI"],
-  },
+  }
 ];
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-20 px-6 bg-[#0a192f]">
+    <section id="experience" className="py-24 px-6 bg-[#0a192f]">
       <div className="max-w-3xl mx-auto">
 
         {/* Section heading */}
         <div className="flex items-center gap-4 mb-12">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">Experience</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white">Experience</h2>
           <div className="flex-1 h-px bg-[#64ffda]/20" />
         </div>
 
@@ -84,7 +84,7 @@ export default function Experience() {
                   )}
                 </div>
                 <p className="text-[#64ffda] font-mono text-sm">{exp.company}</p>
-                <p className="text-gray-500 font-mono text-xs mt-0.5 mb-4">{exp.duration}</p>
+                <p className="text-gray-400 font-mono text-xs mt-0.5 mb-4">{exp.duration}</p>
                 <ul className="space-y-2 mb-5">
                   {exp.responsibilities.map((item, i) => (
                     <li key={i} className="flex gap-2 items-start text-gray-400 text-sm">
