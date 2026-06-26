@@ -46,7 +46,7 @@ export default function About() {
 
         {/* Section heading */}
         <div className="flex items-center gap-4 mb-16">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">About Me</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white">About Me</h2>
           <div className="flex-1 h-px bg-[#64ffda]/20" />
         </div>
 

@@ -88,7 +88,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="py-20 px-6"
+      className="py-24 px-6"
       style={{
         background: "radial-gradient(rgba(100,255,218,0.025) 1px, transparent 1px)",
         backgroundColor: "#0a192f",
@@ -107,10 +107,10 @@ export default function Skills() {
 
         {/* Header */}
         <div className="text-center mb-10">
-          <p className="text-[#64ffda] font-mono text-[11px] tracking-[0.2em] uppercase mb-2">
+          <p className="text-[#64ffda] font-mono text-xs tracking-[0.2em] uppercase mb-2">
             What I Work With
           </p>
-          <h2 className="text-3xl font-bold text-white mb-3">Skills &amp; Technologies</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">Skills &amp; Technologies</h2>
           <div className="w-10 h-[2px] bg-[#64ffda] mx-auto rounded-full" />
         </div>
 
@@ -144,10 +144,10 @@ export default function Skills() {
                     <button
                       key={cat.label}
                       onClick={() => handleSelect(idx)}
-                      className={`relative flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-left text-[12.5px] font-medium whitespace-nowrap md:whitespace-normal w-full transition-all duration-200 outline-none
+                      className={`relative flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-left text-[12.5px] font-medium whitespace-nowrap md:whitespace-normal w-full transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-[#64ffda] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a192f]
                         ${isActive
                           ? "text-[#64ffda]"
-                          : "text-gray-500 hover:text-gray-300 hover:bg-white/[0.04]"
+                          : "text-gray-400 hover:text-gray-200 hover:bg-white/[0.04]"
                         }`}
                       style={isActive ? { background: `${cat.color}` } : {}}
                     >

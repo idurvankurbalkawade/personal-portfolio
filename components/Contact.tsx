@@ -48,12 +48,12 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="min-h-screen bg-[#0a192f] py-20 px-6 flex flex-col items-center justify-center"
+      className="min-h-screen bg-[#0a192f] py-24 px-6 flex flex-col items-center justify-center"
     >
       <div className="w-full max-w-3xl">
         {/* Heading */}
-        <p className="text-[#64ffda] font-mono text-sm mb-2 text-center">What&apos;s Next?</p>
-        <h2 className="text-4xl sm:text-5xl font-bold text-white text-center mb-4">
+        <p className="text-[#64ffda] font-mono text-xs tracking-[0.2em] uppercase mb-2 text-center">What&apos;s Next?</p>
+        <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-4">
           Get In Touch
         </h2>
         <p className="text-gray-400 text-center max-w-xl mx-auto mb-12 leading-relaxed">

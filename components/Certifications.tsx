@@ -27,10 +27,10 @@ export default function Certifications() {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="mb-14">
-          <p className="text-[#64ffda] text-sm font-mono tracking-widest uppercase mb-2">
+          <p className="text-[#64ffda] font-mono text-xs tracking-[0.2em] uppercase mb-2">
             Credentials
           </p>
-          <h2 className="text-4xl font-bold text-white">Certifications</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white">Certifications</h2>
           <div className="mt-4 w-12 h-[2px] bg-gradient-to-r from-[#64ffda] to-transparent rounded-full" />
         </div>
 
@@ -73,7 +73,7 @@ export default function Certifications() {
                       {cert.badge}
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500 font-mono uppercase tracking-wider">
+                      <p className="text-xs text-gray-400 font-mono uppercase tracking-wider">
                         Exam
                       </p>
                       <p className="text-white font-semibold text-sm">
@@ -130,7 +130,7 @@ export default function Certifications() {
                       <line x1="8" y1="2" x2="8" y2="6" />
                       <line x1="3" y1="10" x2="21" y2="10" />
                     </svg>
-                    <span className="text-gray-500 text-xs">
+                    <span className="text-gray-400 text-xs">
                       {cert.issuer} &bull; {cert.date}
                     </span>
                   </div>

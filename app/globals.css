@@ -7,3 +7,21 @@ html,
 body {
   background-color: #060d1a;
 }
+
+/* Baseline keyboard focus indicator for any element that doesn't define its own */
+:focus-visible {
+  outline: 2px solid #64ffda;
+  outline-offset: 2px;
+}
+
+/* Respect users who prefer reduced motion: neutralise the looping/animated UI */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

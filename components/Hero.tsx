@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 
 const TECH = ["FastAPI", "GenAI", "AI Agents", "LangChain", "LangGraph"];
 
+const roles = ["Python Developer", "AI Engineer", "Backend Engineer"];
+
 const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
   id: i,
   x: [8, 15, 24, 33, 43, 52, 61, 70, 78, 87, 94, 6, 20, 38, 55, 72, 85, 12][i],
@@ -13,13 +15,15 @@ const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
 }));
 
 export default function Hero() {
-  const roles = ["Python Developer", "AI Engineer", "Backend Engineer"];
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(t);
+  }, []);
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
@@ -33,8 +37,10 @@ export default function Hero() {
     } else if (isDeleting && displayText.length > 0) {
       timeout = setTimeout(() => setDisplayText(current.slice(0, displayText.length - 1)), speed);
     } else {
-      setIsDeleting(false);
-      setRoleIndex((i) => (i + 1) % roles.length);
+      timeout = setTimeout(() => {
+        setIsDeleting(false);
+        setRoleIndex((i) => (i + 1) % roles.length);
+      }, 400);
     }
 
     return () => clearTimeout(timeout);
@@ -160,10 +166,13 @@ export default function Hero() {
           </span>
         </h1>
 
-        {/* Typing role */}
-        <p className="fade-up-3 text-xl sm:text-2xl font-mono text-[#64ffda] mb-5 h-9" aria-live="polite">
-          {mounted ? displayText : roles[0]}
-          <span className="type-caret" aria-hidden />
+        {/* Typing role — animated text is decorative; expose one static label to SR */}
+        <p className="fade-up-3 text-xl sm:text-2xl font-mono text-[#64ffda] mb-5 h-9">
+          <span className="sr-only">Python Developer, AI Engineer, Backend Engineer</span>
+          <span aria-hidden>
+            {mounted ? displayText : roles[0]}
+            <span className="type-caret" />
+          </span>
         </p>
 
         {/* Tech stack pills */}
@@ -220,7 +229,7 @@ export default function Hero() {
         </div>
 
         {/* Scroll indicator */}
-        <div className="fade-up-6 mt-16 flex flex-col items-center gap-1.5 text-gray-600">
+        <div className="fade-up-6 mt-16 flex flex-col items-center gap-1.5 text-gray-400">
           <span className="text-[10px] font-mono tracking-widest uppercase">scroll</span>
           <svg className="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden>
             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
