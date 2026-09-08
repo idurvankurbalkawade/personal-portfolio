@@ -60,7 +60,7 @@ personal-portfolio/
 - Roles cycling in Hero typing animation: "Software Engineer", "AI Engineer", "Python Developer"
 - Specialization: Agentic AI, Python, FastAPI, LangChain, LangGraph
 - GitHub: github.com/idurvankurbalkawade
-- LinkedIn: (add your profile URL)
+- LinkedIn: linkedin.com/in/durvankur-balkawade-1197a61b3
 
 ## Component Notes
 - **Navbar.tsx** — `"use client"`, uses `useState` for mobile menu toggle,
