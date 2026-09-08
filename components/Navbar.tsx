@@ -2,13 +2,15 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 
+// href is root-relative so a link still resolves on routes that don't contain
+// the target section — the browser navigates home and lands on the anchor.
 const links = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Experience", href: "#experience" },
-  { name: "Certifications", href: "#certifications" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", id: "home" },
+  { name: "About", id: "about" },
+  { name: "Skills", id: "skills" },
+  { name: "Experience", id: "experience" },
+  { name: "Certifications", id: "certifications" },
+  { name: "Contact", id: "contact" },
 ];
 
 export default function Navbar() {
@@ -27,7 +29,7 @@ export default function Navbar() {
 
   // Scroll-spy: active = section whose top is closest to (but not past) 30% down the viewport
   useEffect(() => {
-    const sectionIds = links.map((l) => l.href.slice(1));
+    const sectionIds = links.map((l) => l.id);
 
     const spy = () => {
       // If scrolled to bottom, activate last section
@@ -76,12 +78,13 @@ export default function Navbar() {
   }, [menuOpen]);
 
   const smoothScroll = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-      e.preventDefault();
-      const id = href.slice(1);
+    (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
       const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
       setMenuOpen(false);
+      // Section isn't on this route — let the link navigate to the home anchor.
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: "smooth" });
     },
     []
   );
@@ -98,8 +101,8 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link
-          href="#home"
-          onClick={(e) => smoothScroll(e, "#home")}
+          href="/#home"
+          onClick={(e) => smoothScroll(e, "home")}
           aria-label="Go to home"
           className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-[#64ffda]/40 text-[#64ffda] font-bold text-sm hover:bg-[#64ffda]/10 hover:border-[#64ffda]/70 transition-all duration-200"
         >
@@ -109,12 +112,12 @@ export default function Navbar() {
         {/* Desktop nav links */}
         <div className="hidden sm:flex items-center gap-8">
           {links.map((link) => {
-            const isActive = activeSection === link.href.slice(1);
+            const isActive = activeSection === link.id;
             return (
               <Link
                 key={link.name}
-                href={link.href}
-                onClick={(e) => smoothScroll(e, link.href)}
+                href={`/#${link.id}`}
+                onClick={(e) => smoothScroll(e, link.id)}
                 aria-current={isActive ? "page" : undefined}
                 className={`text-sm font-medium tracking-wide transition-colors duration-200 relative group ${
                   isActive ? "text-[#64ffda]" : "text-gray-400 hover:text-[#64ffda]"
@@ -163,18 +166,22 @@ export default function Navbar() {
       <div
         id="mobile-menu"
         ref={menuRef}
+        aria-hidden={!menuOpen}
+        // `invisible` takes the closed links out of the tab order; because it is
+        // part of the transition it only applies once the collapse has finished.
         className={`sm:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          menuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+          menuOpen ? "max-h-80 opacity-100 visible" : "max-h-0 opacity-0 invisible"
         }`}
       >
         <div className="bg-[#0a192f]/95 backdrop-blur-md border-t border-[#64ffda]/10 px-6 py-4 flex flex-col gap-1">
           {links.map((link) => {
-            const isActive = activeSection === link.href.slice(1);
+            const isActive = activeSection === link.id;
             return (
               <Link
                 key={link.name}
-                href={link.href}
-                onClick={(e) => smoothScroll(e, link.href)}
+                href={`/#${link.id}`}
+                onClick={(e) => smoothScroll(e, link.id)}
+                tabIndex={menuOpen ? undefined : -1}
                 aria-current={isActive ? "page" : undefined}
                 className={`text-sm font-medium tracking-wide py-3 px-2 rounded transition-colors duration-200 border-l-2 ${
                   isActive
